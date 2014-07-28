@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang='ja' ng-app>
+  <head>
+    <title>ショッピングカート</title>
+  </head>
+  <body ng-controller='CartController'>
+    <h1>ご注文内容</h1>
+    <div ng-repeat='item in items'>
+      <span>{{item.title}}</span>
+      <input ng-model='item.quantity'>
+      <span>{{item.price | currency}}</span> <!-- currency: は通貨の組み込みフィルタ -->
+      <span>{{item.price * item.quantity | currency}}</span>
+      <button ng-click='remove($index)'>削除</button>
+    </div>
+
+    <script src='angular.js'></script>
+    <script>
+      function CartController($scope) {
+        $scope.items = [
+          {title: 'ペイントポット', quantity: 8,  price: 3.95},
+          {title: 'ポルカドット',   quantity: 17, price: 12.95},
+          {title: 'ペブル',         quantity: 5,  price: 6.95}
+        ];
+        $scope.remove = function(index) {
+          $scope.items.splice(index, 1);
+        }
+      }
+    </script>
+  </body>
+</html>
+
