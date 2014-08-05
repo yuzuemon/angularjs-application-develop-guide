@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang='ja' ng-app>
+  <body>
+    <div ng-controller='DeathrayMenuController'>
+      <button ng-click='toggleMenu()'>メニューをトグル</button>
+      <ul ng-show='menuState.show'>
+        <li class='menu-disabled-{{isDisabled}}' ng-click='stun()'>気絶</li>
+        <li ng-click='disintegrate()'>崩壊</li>
+        <li ng-click='erase()'>歴史から消去</li>
+      </ul>
+    </div>
+
+    <style type='text/css'>
+      .menu-disabled-true {
+        color: gray;
+      }
+    </style>
+
+    <script src='/js/angular.js'></script>
+    <script>
+      function DeathrayMenuController($scope) {
+        $scope.menuState = {show: false};
+        $scope.isDisabled = false;
+
+        $scope.toggleMenu = function() {
+          $scope.menuState.show = !$scope.menuState.show;
+        }
+
+        $scope.stun = function() {
+          // 標的を気絶させた後の蘇生を可能にするために、メニューを無効化します。
+          $scope.isDisabled = true;
+        }
+
+      }
+
+    </script>
+  </body>
+</html>
+

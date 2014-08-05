@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang='ja' ng-app>
+  <body>
+    <form ng-controller='StartUpController'>
+      見込み: <input ng-change='computeNeeded()' ng-model='startingEstimate'>
+      推奨額: {{needed}}
+      <button ng-click='requestFunding()'>出資を依頼する!</button>
+      <button ng-click='reset()'>リセット</button>
+    </form>
+    <script src='angular.js'></script>
+    <script>
+      function StartUpController($scope) {
+        $scope.computeNeeded = function(){
+          $scope.needed = $scope.startingEstimate * 10;
+        };
+
+        $scope.requestFunding = function() {
+          window.alert('もっと顧客を増やしてからにしてください。');
+        };
+
+        $scope.reset = function() {
+          $scope.startingEstimate = 0;
+          $scope.needed = 0;
+        };
+
+      }
+    </script>
+  </body>
+</html>
+
