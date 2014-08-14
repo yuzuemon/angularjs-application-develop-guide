@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang='ja' ng-app='ShoppingModule'>
+  <body ng-controller='ShoppingController'>
+    <h1>ショッピング!</h1>
+    <table>
+      <tr ng-repeat='item in items'>
+        <td>{{item.title}}</td>
+        <td>{{item.description}}</td>
+        <td>{{item.price | currency}}</td>
+      </tr>
+    </table>
+
+    <script src='/js/angular.js'></script>
+    <script>
+      function ShoppingController($scope, Items) {
+        $scope.items = Items.query();
+      }
+
+      // ショッピングview用のモジュール生成
+      var shoppingModule = angular.module('ShoppingModule', []);
+
+      // サービスのファクトリーセットアップ
+      // サーバ側のDBに対するItemsインタフェースを生成
+      shoppingModule.factory("Items", function() {
+        var items = {};
+
+        items.query = function() {
+          // 実際はDBから取得
+          return [
+            {title: 'ペイントポット', quantity: 8,  price: 3.95},
+            {title: 'ポルカドット',   quantity: 17, price: 12.95},
+            {title: 'ペブル',         quantity: 5,  price: 6.95}
+          ];
+        };
+        return items;
+      });
+
+    </script>
+  </body>
+</html>
+
